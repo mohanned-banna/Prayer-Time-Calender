@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
+</head>
+
+<body>
+    <header>
+        <div class="city-name">
+            <div class="city-line"></div>
+            <div class="city-name-content">
+                <span class="city-title">اختر المدينة:</span>
+                <select class="city-list" id="cities">
+
+                </select>
+                <span class="day" id="day"></span>
+                <span class="month" id="hijriMonth"></span>
+                <span class="month" id="meladeMonth"></span>
+            </div>
+
+        </div>
+        <div class="header-content">
+            <h1>( مواقيت الصلوات ) </h1>
+            <p class="next-prayer">الصلاة التالية</p>
+            <p class="name-prayer" id="name-prayer"></p>
+            <p class="time-now" id="time-now"></p>
+        </div>
+
+    </header>
+    <div class="desc">
+        <p> اتْلُ مَا أُوحِيَ إِلَيْكَ مِنَ الْكِتَابِ وَأَقِمِ الصَّلَاةَ ۖ إِنَّ الصَّلَاةَ تَنْهَىٰ عَنِ الْفَحْشَاءِ
+            وَالْمُنكَرِ ۗ وَلَذِكْرُ اللَّهِ أَكْبَرُ ۗ وَاللَّهُ يَعْلَمُ مَا تَصْنَعُونَ (45) </p>
+        <p> ( سورة العنكبوت )</p>
+    </div>
+    <div class="prayers">
+        <div class="prayer-content" id="prayer-content-Fajr">
+            <h2> الفجر </h2>
+            <h2 id="Fajr"></h2>
+        </div>
+        <div class="prayer-content" id="prayer-content-Sunrise">
+            <h2> الشروق </h2>
+            <h2 id="Sunrise"></h2>
+        </div>
+        <div class="prayer-content" id="prayer-content-Dhuhr">
+            <h2> الظهر </h2>
+            <h2 id="Dhuhr"></h2>
+        </div>
+        <div class="prayer-content" id="prayer-content-Asr">
+            <h2> العصر </h2>
+            <h2 id="Asr"></h2>
+        </div>
+        <div class="prayer-content" id="prayer-content-Maghrib">
+            <h2> المغرب </h2>
+            <h2 id="Maghrib"></h2>
+        </div>
+        <div class="prayer-content" id="prayer-content-Isha">
+            <h2> العشاء </h2>
+            <h2 id="Isha"></h2>
+        </div>
+
+    </div>
+</body>
+<script src="node_modules/axios/dist/axios.min.js"></script>
+<script>
+
+
+
+
+
+    let cities = [
+        "غزة", " القدس", " مكة المكرمة "
+    ]
+    for (city of cities) {
+        const content = `
+            <option>${city}</option>
+            `
+        document.getElementById("cities").innerHTML += content
+    }
+var country = [
+    "http://api.aladhan.com/v1/timingsByCity?country=PS&city=gaza",
+    "http://api.aladhan.com/v1/timingsByCity?country=PS&city=AlQuds",
+    "http://api.aladhan.com/v1/timingsByCity?country=PS&city=Makkah al Mukarramah"
+    
+]
+    document.getElementById("cities").addEventListener(("change"),function(){
+        if(this.value == "غزة"){
+            getprayerbyAxios(country[0])
+            // alert("غزة")
+        }else if(this.value == "القدس"){
+             getprayerbyAxios(country[1])
+            // alert("القدس")
+        }
+        else if(this.value == "مكة المكرمة"){
+            getprayerbyAxios(country[2])
+            // alert("امريكا")
+        }
+    })
+
+    function datenow() {
+        var now = new Date();
+        return ((now.getHours() > 12) ? (now.getHours() - 12) : now.getHours()) + ":" + ((now.getMinutes() < 10) ? "0" : "") + now.getMinutes() + " " + ((now.getHours() >= 12) ? ("م") : "ص")
+    }
+   
+    function timeNow() {
+        let now = new Date();
+        return now.getHours() + ":" + now.getMinutes()
+        
+        
+    }
+    datenow()
+   
+    document.getElementById("time-now").innerHTML = datenow();
+    
+    
+    function getprayerbyAxios(linknumber) {
+        axios.get(`${linknumber}`)
+            .then((response) => {
+                function day() {
+                    var day = response.data.data.date.hijri.weekday.ar
+                    document.getElementById("day").innerHTML = day
+                }
+                day();
+                function hijriDate() {
+                    var hijri = response.data.data.date.hijri
+                    var hijriDay = hijri.month.number + " " + hijri.month.ar + " " + hijri.year
+                    document.getElementById("hijriMonth").innerHTML = hijriDay
+                }
+                hijriDate()
+                function meladeDate() {
+                    var melade = response.data.data.date.gregorian.date
+                    document.getElementById("meladeMonth").innerHTML = melade
+                }
+                meladeDate()
+                function timePrayer() {
+                    var timings = response.data.data.timings
+                    innerPrayer("Fajr", timings.Fajr)
+                    innerPrayer("Sunrise", timings.Sunrise)
+                    innerPrayer("Dhuhr", timings.Dhuhr)
+                    innerPrayer("Asr", timings.Asr)
+                    innerPrayer("Maghrib", timings.Maghrib)
+                    innerPrayer("Isha", timings.Isha)
+                    function innerPrayer(id, time) {
+                        let hour = time[0] + time[1]
+                        if (hour > 12) {
+                            let newHour = Number(hour) - 12
+                            nowTime = "0" + newHour + time[2] + time[3] + time[4] + " م "
+                            document.getElementById(id).innerHTML = nowTime
+                        }
+                        else {
+                            document.getElementById(id).innerHTML = time + " ص ";
+                        }
+                    }
+                    var prayer = [
+                        {
+                            name: "Fajr",
+                            time: timings.Fajr,
+                            ar: "الفجر"
+                        },
+                        {
+                            name: "Sunrise",
+                            time: timings.Sunrise,
+                            ar: "الشروق"
+                        },
+                        {
+                            name: "Dhuhr",
+                            time: timings.Dhuhr,
+                            ar: "الظهر"
+                        },
+                        {
+                            name: "Asr",
+                            time: timings.Asr,
+                            ar: "العصر"
+                        },
+                        {
+                            name: "Maghrib",
+                            time: timings.Maghrib,
+                            ar: "المغرب"
+                        },
+                        {
+                            name: "Isha",
+                            time: timings.Isha,
+                            ar: "العشاء"
+                        }
+                    ]
+                    var i = 0
+                    var z = timeNow()
+                    // if (timeNow() == "19:00") {
+                    //     function timesNow() {
+                    //         let now = new Date();
+                    //         return (now.getHours() + 6) + ":" + now.getMinutes()
+                    //     }
+                    //     var y = timesNow()
+                    //     nextPrayer(y);
+                    // } else {
+                    //     nextPrayer(z);
+                    // }
+                    function nextPrayer(x) {
+                        var i = 0
+                        if (x > (prayer[i].time) && x < (prayer[++i].time)) {
+                            document.getElementById(`prayer-content-${prayer[i].name}`).style.background = "linear-gradient(90deg,#083459 0% ,#16b6fb 50% ,#063255 100%)"
+                        }
+                        else if (x > (prayer[i].time) && x < (prayer[++i].time)) {
+                            document.getElementById(`prayer-content-${prayer[i].name}`).style.background = "linear-gradient(90deg,#083459 0% ,#16b6fb 50% ,#063255 100%)"
+                        }
+                        else if (x > (prayer[i].time) && x < (prayer[++i].time)) {
+                            document.getElementById(`prayer-content-${prayer[i].name}`).style.background = "linear-gradient(90deg,#083459 0% ,#16b6fb 50% ,#063255 100%)"
+                        }
+                        else if (x > (prayer[i].time) && x < (prayer[++i].time)) {
+                            document.getElementById(`prayer-content-${prayer[i].name}`).style.background = "linear-gradient(90deg,#083459 0% ,#16b6fb 50% ,#063255 100%)"
+                        }else if (x > (prayer[i].time) && x < (prayer[++i].time)) {
+                            document.getElementById(`prayer-content-${prayer[i].name}`).style.background = "linear-gradient(90deg,#083459 0% ,#16b6fb 50% ,#063255 100%)"
+                        }else if (!(x > (prayer[i].time) && x < (prayer[++i].time))) {
+                            i = 0
+                            document.getElementById(`prayer-content-${prayer[i].name}`).style.background = "linear-gradient(90deg,#083459 0% ,#16b6fb 50% ,#063255 100%)"
+                        }
+                        document.getElementById("name-prayer").innerHTML = prayer[i].ar
+                    }
+                    nextPrayer(z)
+                    // console.log(z)
+                }
+                timePrayer()
+            })
+    }
+    getprayerbyAxios(country[0]);
+
+
+
+
+
+
+
+
+
+</script>
+
+</html>

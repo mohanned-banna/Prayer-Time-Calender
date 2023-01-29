@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300&family=Tajawal&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Almarai', sans-serif;
+}
+html{
+    direction: rtl;
+}
+body{
+    
+    height: 100vh;
+    color: white;
+    /* background: linear-gradient(132deg ,#1a0149 0%,rgba(186,71,82,1)100%); */
+    background-image: url(بعا5.png); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* font-family: 'Almarai', sans-serif; */
+}
+header{
+    display: flex;
+}
+.city-name{
+    display: flex;
+    margin:80px 15px 0 0;
+}
+.city-line{
+    background-color: white;
+    height: 185px;
+    width: 3px;
+}
+.city-name-content {
+    margin-right: 15px;
+    line-height: 2;
+
+}
+.city-name-content span{
+    display: block;
+    
+}
+.city-list{
+    width: 200px;
+    height: 35px;
+    background-color: #082945;;
+    color: white;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    font-size: 20px;
+    font-family: 'Almarai', sans-serif;
+}
+.day,.month{
+    font-size: 20px;
+}
+
+.header-content{
+    margin: 3% 25% 0 0;
+    line-height: 1.5;
+    text-align: center;
+    color: #082945;
+}
+h1{
+    font-size: 45px;
+}
+.next-prayer , .time-now{
+    font-size: 30px;
+    font-weight: bold;
+    
+}
+.name-prayer {
+    font-size: 80px;
+}
+.nothing img{
+    text-align: left;
+}
+.desc{
+    margin-top: 40px;
+    height: 120px;
+    width: 100%;
+    border-top:1px solid white ;
+    border-bottom:1px solid white ;
+    background-color: #210b4e;
+    text-align: center;
+    padding-top: 35px;
+    font-size: 25px;
+}
+.prayers{
+    display: flex;
+    /* height: 100px; */
+    justify-content: center;
+    align-items: center;
+    margin-top: 55px;
+    
+}
+.prayer-content{
+    width: 15%;
+    height: 160px;
+    background-color: #5fbde4;
+    color: #082945;
+    text-align: center;
+    padding-top: 45px;
+    margin: 0 10px;
+    border-radius: 40px;
+    -webkit-border-radius: 40px;
+    -moz-border-radius: 40px;
+    -ms-border-radius: 40px;
+    -o-border-radius: 40px;
+    font-size: 18px;
+    line-height: 1.5;
+    background: 
+}
