@@ -215,7 +215,7 @@ var country = [
                             document.getElementById(`prayer-content-${prayer[i].name}`).style.background = "linear-gradient(90deg,#083459 0% ,#16b6fb 50% ,#063255 100%)"
                         }else if (x > (prayer[i].time) && x < (prayer[++i].time)) {
                             document.getElementById(`prayer-content-${prayer[i].name}`).style.background = "linear-gradient(90deg,#083459 0% ,#16b6fb 50% ,#063255 100%)"
-                        }else if (!(x > (prayer[i].time) && x < (prayer[++i].time))) {
+                        }else if (!(x < (prayer[i].time))) {
                             i = 0
                             document.getElementById(`prayer-content-${prayer[i].name}`).style.background = "linear-gradient(90deg,#083459 0% ,#16b6fb 50% ,#063255 100%)"
                         }
