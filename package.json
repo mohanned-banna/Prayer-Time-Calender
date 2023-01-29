@@ -8,8 +8,16 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "axios": "^1.2.6"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohanned-banna/Prayer-Time-Calender.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mohanned-banna/Prayer-Time-Calender/issues"
+  },
+  "homepage": "https://github.com/mohanned-banna/Prayer-Time-Calender#readme",
+  "description": ""
 }
