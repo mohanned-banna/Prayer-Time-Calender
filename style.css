@@ -110,5 +110,62 @@ h1{
     -o-border-radius: 40px;
     font-size: 18px;
     line-height: 1.5;
-    background: 
+    
 }
+
+@media screen and (max-width:400px){
+    body{
+        background-position: 100%;
+
+    }
+    .header{
+        position: relative;
+    }
+    .city-name{
+        position: absolute;
+        display: flex;
+        margin-top: -2px;
+        right: 0;
+        flex-wrap: wrap;
+    }
+    .prayers{
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+
+}
+@media screen and (min-width:401px) and (max-width:768px){
+    body{
+        
+        background-position: 100%;
+
+    }
+    .header{
+        position: relative;
+    }
+    .city-name{
+        position: absolute;
+        display: flex;
+        top: 0;
+        right: 0;
+        flex-wrap: wrap;
+    }
+}
+@media screen and (min-width:769px) and (max-width:1300px){
+    body{
+        
+        background-position: 100%;
+
+    }
+    .header{
+        position: relative;
+    }
+    .city-name{
+        position: absolute;
+        display: flex;
+        top: 0;
+        right: 0;
+        flex-wrap: wrap;
+    }
+}
+
