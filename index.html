@@ -82,12 +82,12 @@
             `
         document.getElementById("cities").innerHTML += content
     }
-// var country = [
-//     "http://api.aladhan.com/v1/timingsByCity?country=PS&city=gaza",
-//     "http://api.aladhan.com/v1/timingsByCity?country=PS&city=AlQuds",
-//     "http://api.aladhan.com/v1/timingsByCity?country=PS&city=Makkah al Mukarramah"
+var country = [
+    "http://api.aladhan.com/v1/timingsByCity?country=PS&city=gaza",
+    "http://api.aladhan.com/v1/timingsByCity?country=PS&city=AlQuds",
+    "http://api.aladhan.com/v1/timingsByCity?country=PS&city=Makkah al Mukarramah"
     
-// ]
+]
     document.getElementById("cities").addEventListener(("change"),function(){
         if(this.value == "غزة"){
             getprayerbyAxios(country[0])
@@ -118,9 +118,9 @@
     document.getElementById("time-now").innerHTML = datenow();
     
     
-    function getprayerbyAxios() {
-        // axios.get(`${linknumber}`)
-        axios.get("http://api.aladhan.com/v1/timingsByCity?country=PS&city=gaza")
+    function getprayerbyAxios(linknumber) {
+        axios.get(`${linknumber}`)
+        // axios.get("http://api.aladhan.com/v1/timingsByCity?country=PS&city=gaza")
         .then((response) => {
                 function day() {
                     var day = response.data.data.date.hijri.weekday.ar
@@ -238,7 +238,7 @@
                 timePrayer()
             })
     }
-    getprayerbyAxios();
+    getprayerbyAxios(country[0]);
 
 
 
