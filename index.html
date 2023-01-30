@@ -95,20 +95,14 @@
             // alert("امريكا")
         }
     })
-
     function datenow() {
         var now = new Date();
         return ((now.getHours() > 12) ? (now.getHours() - 12) : now.getHours()) + ":" + ((now.getMinutes() < 10) ? "0" : "") + now.getMinutes() + " " + ((now.getHours() >= 12) ? ("م") : "ص")
     }
-
     function timeNow() {
         let now = new Date();
         return now.getHours() + ":" + now.getMinutes()
-
-
     }
-
-
 
     function dateTime(time) {
         let parts = time.split(":");
@@ -124,7 +118,7 @@
 
     document.getElementById("time-now").innerHTML = datenow();
 
-    setTimeout(() => {
+    // set(() => {
         function getprayerbyAxios(linknumber) {
             axios.get(`${linknumber}`)
                 // axios.get("https://api.aladhan.com/v1/timingsByCity?country=PS&city=gaza")
@@ -219,17 +213,20 @@
                     }, {});
                     const next = nextPrayer || prayers[0];
                     const nextPrayerName = next.name;
+                    const nextPrayerNameArabic = next.ar
                     if (document.querySelector('.prayers > div.active') !== null) {
                         document.querySelector('.prayers div.active').classList.remove('active');
+                        document.getElementById("name-prayer").innerHTML = nextPrayerNameArabic
                     }
                     document.getElementById(next.id).classList.add("active")
-                    console.log({ next, nextPrayerName })
+                    // console.log({ next, nextPrayerName })
                     timePrayer()
                 })
         }
 
+        // console.log("hello")
         getprayerbyAxios(country[0]);
-    }, 1);
+    // },6000);
 
 
 
