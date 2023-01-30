@@ -8,6 +8,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 </head>
 
 <body>
@@ -113,6 +114,22 @@ var country = [
         
         
     }
+
+
+    function dateTime(time) {
+        let parts = time.split(":");
+        const [h,m] = parts;
+        let hours = parseInt(h);
+        let minutes = parseInt(m);
+        let date = new Date();
+        date.setHours(hours);
+        date.setMinutes(minutes);
+        return date
+    }
+
+    function isBetween(params) {
+        const duhur =  isBetween()
+    }
     datenow()
    
     document.getElementById("time-now").innerHTML = datenow();
@@ -161,35 +178,46 @@ var country = [
                         {
                             name: "Fajr",
                             time: timings.Fajr,
-                            ar: "الفجر"
+                            ar: "الفجر",
+                            dateTime: dateTime(timings.Fajr)
                         },
                         {
                             name: "Sunrise",
                             time: timings.Sunrise,
-                            ar: "الشروق"
+                            ar: "الشروق",
+                            dateTime: dateTime(timings.Sunrise)
+
                         },
                         {
                             name: "Dhuhr",
                             time: timings.Dhuhr,
-                            ar: "الظهر"
+                            ar: "الظهر",
+                            dateTime: dateTime(timings.Dhuhr)
+
                         },
                         {
                             name: "Asr",
                             time: timings.Asr,
-                            ar: "العصر"
+                            ar: "العصر",
+                            dateTime: dateTime(timings.Asr)
+
                         },
                         {
                             name: "Maghrib",
                             time: timings.Maghrib,
-                            ar: "المغرب"
+                            ar: "المغرب",
+                            dateTime: dateTime(timings.Maghrib)
+
                         },
                         {
                             name: "Isha",
                             time: timings.Isha,
-                            ar: "العشاء"
+                            ar: "العشاء",
+                            dateTime: dateTime(timings.Isha)
+
                         }
                     ]
-                    
+                    console.log({prayer})
                     var z = timeNow()
                     // if (timeNow() == "19:00") {
                     //     function timesNow() {
@@ -219,7 +247,7 @@ var country = [
                         else if (x > (prayer[i].time) && x < (prayer[++i].time) || x == prayer[i].time) {
                             console.log("مغرب")
                             document.getElementById(`prayer-content-${prayer[i].name}`).style.background = "linear-gradient(90deg,#083459 0% ,#16b6fb 50% ,#063255 100%)"
-                        }else if (x > (prayer[i].time) && x < (prayer[++i].time) || x == prayer[i].time) {
+                        }else if (x > (prayer[i].time) && x < (prayer[++i].time) ) {
                             console.log("عشاء")
                             document.getElementById(`prayer-content-${prayer[i].name}`).style.background = "linear-gradient(90deg,#083459 0% ,#16b6fb 50% ,#063255 100%)"
                         }
