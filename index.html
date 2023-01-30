@@ -114,6 +114,7 @@ var country = [
         
         
     }
+    
 
 
     function dateTime(time) {
@@ -127,14 +128,17 @@ var country = [
         return date
     }
 
-    function isBetween(params) {
-        const duhur =  isBetween()
-    }
+    // function isBetween(params) {
+    //     const duhur =  isBetween()
+    // }
     datenow()
    
     document.getElementById("time-now").innerHTML = datenow();
     
+   
+        
     
+    setTimeout(() => {
     function getprayerbyAxios(linknumber) {
         axios.get(`${linknumber}`)
         // axios.get("https://api.aladhan.com/v1/timingsByCity?country=PS&city=gaza")
@@ -174,7 +178,7 @@ var country = [
                             document.getElementById(id).innerHTML = time + " ص ";
                         }
                     }
-                    var prayer = [
+                    var prayers = [
                         {
                             name: "Fajr",
                             time: timings.Fajr,
@@ -217,56 +221,61 @@ var country = [
 
                         }
                     ]
-                    console.log({prayer})
-                    var z = timeNow()
-                    // if (timeNow() == "19:00") {
-                    //     function timesNow() {
-                    //         let now = new Date();
-                    //         return (now.getHours() + 6) + ":" + now.getMinutes()
-                    //     }
-                    //     var y = timesNow()
-                    //     nextPrayer(y);
-                    // } else {
-                    //     nextPrayer(z);
-                    // }
-                    function nextPrayer(x) {
-                        var i = 0
-                        
-                        if (x > (prayer[i].time) && x < (prayer[++i].time) || x == prayer[i].time ) {
-                            console.log("شروق")
-                            document.getElementById(`prayer-content-${prayer[i].name}`).style.background = "linear-gradient(90deg,#083459 0% ,#16b6fb 50% ,#063255 100%)"
-                        }
-                        else if (x > (prayer[i].time) && x < (prayer[++i].time) || x == prayer[i].time) {
-                            console.log("ظهر")
-                            document.getElementById(`prayer-content-${prayer[i].name}`).style.background = "linear-gradient(90deg,#083459 0% ,#16b6fb 50% ,#063255 100%)"
-                        }
-                        else if (x > (prayer[i].time) && x < (prayer[++i].time) || x == prayer[i].time) {
-                            console.log("عصر")
-                            document.getElementById(`prayer-content-${prayer[i].name}`).style.background = "linear-gradient(90deg,#083459 0% ,#16b6fb 50% ,#063255 100%)"
-                        }
-                        else if (x > (prayer[i].time) && x < (prayer[++i].time) || x == prayer[i].time) {
-                            console.log("مغرب")
-                            document.getElementById(`prayer-content-${prayer[i].name}`).style.background = "linear-gradient(90deg,#083459 0% ,#16b6fb 50% ,#063255 100%)"
-                        }else if (x > (prayer[i].time) && x < (prayer[++i].time) ) {
-                            console.log("عشاء")
-                            document.getElementById(`prayer-content-${prayer[i].name}`).style.background = "linear-gradient(90deg,#083459 0% ,#16b6fb 50% ,#063255 100%)"
-                        }
-                        else if ( (x > (prayer[i].time) && x < (24)) || x == prayer[i].time)  {
-                            i = 0
-                            console.log("فجر")
-                            document.getElementById(`prayer-content-${prayer[i].name}`).style.background = "linear-gradient(90deg,#083459 0% ,#16b6fb 50% ,#063255 100%)"
-                        }
-                        document.getElementById("name-prayer").innerHTML = prayer[i].ar
-                    }
-                    nextPrayer(z)
-                    // console.log(i)
                     
-                    // console.log(z)
+                    var z = timeNow()
+                    const nextPrayer = prayers.reduce((_, currentValue) => {
+                            const now = new Date();
+                            if (now < currentValue.dateTime) {
+                                return currentValue;
+                            }
+                        }, {});
+                        const next = nextPrayer || nextPrayer[0]
+                        const nextPrayerName = nextPrayer.name 
+                        
+                        console.log(nextPrayer)
+                            
+                    // function nextPrayer(x) {
+                    //     var i = 0
+                        
+                    //     if (x > (prayer[i].time) && x < (prayer[++i].time) || x == prayer[i].time ) {
+                    //         console.log("شروق")
+                    //         document.getElementById(`prayer-content-${prayer[i].name}`).style.background = "linear-gradient(90deg,#083459 0% ,#16b6fb 50% ,#063255 100%)"
+                    //     }
+                    //     else if (x > (prayer[i].time) && x < (prayer[++i].time) || x == prayer[i].time) {
+                    //         console.log("ظهر")
+                    //         document.getElementById(`prayer-content-${prayer[i].name}`).style.background = "linear-gradient(90deg,#083459 0% ,#16b6fb 50% ,#063255 100%)"
+                    //     }
+                    //     else if (x > (prayer[i].time) && x < (prayer[++i].time) || x == prayer[i].time) {
+                    //         console.log("عصر")
+                    //         document.getElementById(`prayer-content-${prayer[i].name}`).style.background = "linear-gradient(90deg,#083459 0% ,#16b6fb 50% ,#063255 100%)"
+                    //     }
+                    //     else if (x > (prayer[i].time) && x < (prayer[++i].time) || x == prayer[i].time) {
+                    //         console.log("مغرب")
+                    //         document.getElementById(`prayer-content-${prayer[i].name}`).style.background = "linear-gradient(90deg,#083459 0% ,#16b6fb 50% ,#063255 100%)"
+                    //     }else if (x > (prayer[i].time) && x < (prayer[++i].time) ) {
+                    //         console.log("عشاء")
+                    //         document.getElementById(`prayer-content-${prayer[i].name}`).style.background = "linear-gradient(90deg,#083459 0% ,#16b6fb 50% ,#063255 100%)"
+                    //     }
+                    //     else if ( (x > (prayer[i].time) && x < timings.Fajr[1]) )  {
+                    //         i = 0
+                    //         console.log("فجر")
+                    //         document.getElementById(`prayer-content-${prayer[i].name}`).style.background = "linear-gradient(90deg,#083459 0% ,#16b6fb 50% ,#063255 100%)"
+                    //     }
+                    //     document.getElementById("name-prayer").innerHTML = prayer[i].ar
+                    //     console.log(x)
+                    //     console.log(timings.Fajr[1])
+                    // }
+                    // nextPrayer(z)
+                    
+                    
                 }
                 timePrayer()
+                
             })
     }
+
     getprayerbyAxios(country[0]);
+}, 60000);
 
 
 
