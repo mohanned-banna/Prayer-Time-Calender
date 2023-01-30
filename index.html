@@ -204,26 +204,26 @@ var country = [
                     function nextPrayer(x) {
                         var i = 0
                         
-                        if (x > (prayer[i].time) && x < (prayer[++i].time)) {
+                        if (x > (prayer[i].time) && x < (prayer[++i].time) || x == prayer[i].time ) {
                             console.log("شروق")
                             document.getElementById(`prayer-content-${prayer[i].name}`).style.background = "linear-gradient(90deg,#083459 0% ,#16b6fb 50% ,#063255 100%)"
                         }
-                        else if (x > (prayer[i].time) && x < (prayer[++i].time)) {
+                        else if (x > (prayer[i].time) && x < (prayer[++i].time) || x == prayer[i].time) {
                             console.log("ظهر")
                             document.getElementById(`prayer-content-${prayer[i].name}`).style.background = "linear-gradient(90deg,#083459 0% ,#16b6fb 50% ,#063255 100%)"
                         }
-                        else if (x > (prayer[i].time) && x < (prayer[++i].time)) {
+                        else if (x > (prayer[i].time) && x < (prayer[++i].time) || x == prayer[i].time) {
                             console.log("عصر")
                             document.getElementById(`prayer-content-${prayer[i].name}`).style.background = "linear-gradient(90deg,#083459 0% ,#16b6fb 50% ,#063255 100%)"
                         }
-                        else if (x > (prayer[i].time) && x < (prayer[++i].time)) {
+                        else if (x > (prayer[i].time) && x < (prayer[++i].time) || x == prayer[i].time) {
                             console.log("مغرب")
                             document.getElementById(`prayer-content-${prayer[i].name}`).style.background = "linear-gradient(90deg,#083459 0% ,#16b6fb 50% ,#063255 100%)"
-                        }else if (x > (prayer[i].time) && x < (prayer[++i].time)) {
+                        }else if (x > (prayer[i].time) && x < (prayer[++i].time) || x == prayer[i].time) {
                             console.log("عشاء")
                             document.getElementById(`prayer-content-${prayer[i].name}`).style.background = "linear-gradient(90deg,#083459 0% ,#16b6fb 50% ,#063255 100%)"
                         }
-                        else if ( (x > (prayer[i].time) && x < (24)))  {
+                        else if ( (x > (prayer[i].time) && x < (24)) || x == prayer[i].time)  {
                             i = 0
                             console.log("فجر")
                             document.getElementById(`prayer-content-${prayer[i].name}`).style.background = "linear-gradient(90deg,#083459 0% ,#16b6fb 50% ,#063255 100%)"
