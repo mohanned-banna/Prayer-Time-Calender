@@ -219,7 +219,9 @@
                     //         return currentValue;
                     //     }
                     // }, {});
-                    
+                    const arr = [1,2,3,4]
+                    const sum = arr.reduce((prev,next)=>{return prev + next},5)
+                    console.log(sum);
                     const nextPrayer = prayers.find((value) => {
                         const now = new Date();
                         console.log(value.name)
@@ -235,10 +237,11 @@
                     // console.log(next.id)
                     // console.log(nextPrayerName)
                     const nextPrayerNameArabic = next.ar
+                    document.getElementById("name-prayer").innerHTML = nextPrayerNameArabic
                     if (document.querySelector('.prayers > div.active') !== null) {
                         // console.log("innerIF")
                         document.querySelector('.prayers div.active').classList.remove('active');
-                        document.getElementById("name-prayer").innerHTML = nextPrayerNameArabic
+                        
                         
                     }
                     // console.log("before")
