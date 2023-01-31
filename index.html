@@ -118,7 +118,7 @@
 
     document.getElementById("time-now").innerHTML = datenow();
 
-    // set(() => {
+    // setInterval(() => {
         function getprayerbyAxios(linknumber) {
             axios.get(`${linknumber}`)
                 // axios.get("https://api.aladhan.com/v1/timingsByCity?country=PS&city=gaza")
@@ -208,18 +208,26 @@
                     const nextPrayer = prayers.reduce((_, currentValue) => {
                         const now = new Date();
                         if (now < currentValue.dateTime) {
+                            // console.log("hello")
                             return currentValue;
+                            
                         }
                     }, {});
                     const next = nextPrayer || prayers[0];
+                    console.log(next)
                     const nextPrayerName = next.name;
+                    console.log(nextPrayerName)
                     const nextPrayerNameArabic = next.ar
                     if (document.querySelector('.prayers > div.active') !== null) {
+                        // console.log("innerIF")
                         document.querySelector('.prayers div.active').classList.remove('active');
                         document.getElementById("name-prayer").innerHTML = nextPrayerNameArabic
                     }
-                    document.getElementById(next.id).classList.add("active")
-                    // console.log({ next, nextPrayerName })
+                    console.log("before")
+                    console.log(next.id)
+                    document.getElementById("prayer-content-Sunrise").classList.add("active")
+                    console.log("after")
+                    console.log({ next, nextPrayerName })
                     timePrayer()
                 })
         }
